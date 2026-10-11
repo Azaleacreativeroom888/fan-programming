@@ -3,152 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>勉強ブログ | アプリの勉強ノート</title>
-<meta name="description" content="アプリの勉強の進捗を、日付とひとことで記録するブログです。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;800&display=swap" rel="stylesheet">
+<title>blog | Code Study Notes</title>
 <style>
-:root {
-  --red: #ff0000;
-  --red-deep: #c20000;
-  --ink: #2a0a0a;
-  --paper: #fff8f6;
-  --blush: #ffe3e0;
-  --white: #ffffff;
-  --font: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: var(--font);
-  color: var(--ink);
-  background: var(--paper);
-  line-height: 1.85;
-  font-size: 16px;
-}
-a { color: inherit; }
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  :root {
+    --main: #7fffd4;
+    --main-soft: #d9fff2;
+    --main-deep: #2fbf94;
+    --ink: #0f3d33;
+    --bg: #f4fffb;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.8;
+  }
+  a { color: inherit; text-decoration: none; }
 
-/* ---------- header ---------- */
-.site-header { background: var(--red); color: var(--white); }
-.site-header .inner {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.logo { font-weight: 800; font-size: 1.15rem; text-decoration: none; letter-spacing: .02em; }
-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: wrap; }
-nav a {
-  display: block;
-  padding: 6px 16px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: .95rem;
-}
-nav a:hover { background: rgba(255,255,255,.2); }
-nav a[aria-current="page"] { background: var(--white); color: var(--red-deep); font-weight: 800; }
+  /* header */
+  header {
+    background: var(--main);
+    border-bottom: 3px solid var(--ink);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav {
+    max-width: 960px; margin: 0 auto; padding: 12px 20px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .logo { font-family: "Courier New", monospace; font-weight: bold; font-size: 1.15rem; }
+  .logo span { background: var(--ink); color: var(--main); padding: 0 6px; border-radius: 4px; }
+  nav ul { list-style: none; display: flex; gap: 6px; flex-wrap: wrap; }
+  nav a {
+    display: block; padding: 4px 14px; border-radius: 999px;
+    font-family: "Courier New", monospace; font-size: .9rem; font-weight: bold;
+  }
+  nav a:hover, nav a.current { background: var(--ink); color: var(--main); }
 
-/* ---------- page title ---------- */
-.page-title { background: var(--red); color: var(--white); padding: 28px 20px 44px; }
-.page-title .inner { max-width: 1040px; margin: 0 auto; }
-.page-title h1 { margin: 0 0 6px; font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.3; }
-.page-title p { margin: 0; font-weight: 500; }
+  /* page title */
+  .page-title { max-width: 640px; margin: 0 auto; padding: 40px 20px 8px; }
+  .page-title h1 { font-family: "Courier New", monospace; font-size: 1.8rem; }
+  .page-title h1::before { content: "//"; color: var(--main-deep); margin-right: 10px; }
+  .page-title p { font-size: .95rem; }
 
-/* ---------- feed ---------- */
-main { max-width: 680px; margin: 0 auto; padding: 36px 20px 0; }
-.feed { display: grid; gap: 16px; }
-.post {
-  background: var(--white);
-  border: 3px solid var(--ink);
-  border-radius: 20px;
-  padding: 16px 22px 18px;
-}
-.post time {
-  display: block;
-  font-size: .82rem;
-  font-weight: 800;
-  color: var(--red-deep);
-}
-.post p { margin: 4px 0 0; overflow-wrap: anywhere; }
+  /* timeline */
+  main { max-width: 640px; margin: 0 auto; padding: 16px 20px 56px; }
+  .timeline { border: 2px solid var(--ink); border-radius: 14px; background: var(--card); overflow: hidden; box-shadow: 4px 4px 0 var(--main); }
+  .post { padding: 16px 20px; border-bottom: 1px solid var(--main-soft); display: flex; gap: 14px; }
+  .post:last-child { border-bottom: none; }
+  .post:hover { background: var(--bg); }
+  .avatar {
+    flex: none; width: 42px; height: 42px; border-radius: 50%;
+    background: var(--main); border: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Courier New", monospace; font-weight: bold; font-size: .85rem;
+  }
+  .post-body { flex: 1; min-width: 0; }
+  .post time { font-family: "Courier New", monospace; font-size: .8rem; color: var(--main-deep); font-weight: bold; }
+  .post p { font-size: .96rem; overflow-wrap: anywhere; }
 
-.note { text-align: center; margin: 36px 0 0; font-size: .9rem; color: var(--red-deep); font-weight: 800; }
+  .back { display: inline-block; margin-top: 24px; font-family: "Courier New", monospace; font-weight: bold; border-bottom: 3px solid var(--main); }
 
-footer {
-  margin-top: 80px;
-  background: var(--red);
-  color: var(--white);
-  text-align: center;
-  padding: 26px 20px;
-  font-size: .9rem;
-  font-weight: 500;
-}
+  footer { background: var(--main); border-top: 3px solid var(--ink); text-align: center; padding: 20px; font-family: "Courier New", monospace; font-size: .85rem; }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="inner">
-    <a class="logo" href="index.html">アプリの勉強ノート</a>
-    <nav aria-label="メインメニュー">
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html"><span>&gt;_</span> Code Study Notes</a>
+    <nav>
       <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="blog.html" aria-current="page">ブログ</a></li>
-        <li><a href="column.html">コラム</a></li>
-        <li><a href="about.html">このサイトについて</a></li>
+        <li><a href="index.html">index</a></li>
+        <li><a class="current" href="blog.html">blog</a></li>
+        <li><a href="column.html">column</a></li>
+        <li><a href="about.html">about</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <div class="page-title">
-  <div class="inner">
-    <h1>勉強ブログ</h1>
-    <p>日付とひとことだけの、勉強の進捗メモです。新しい順に並べています。</p>
-  </div>
+  <h1>blog</h1>
+  <p>勉強の進捗ログ。新しい順に並べています。</p>
 </div>
 
 <main>
-  <div class="feed">
-    <!-- 新しい投稿は、この下にコピーして一番上に追加してください -->
+  <div class="timeline">
+
+    <!-- ▼ 新しい投稿は、この下に <article> ごと追加してください（上が最新） -->
     <article class="post">
-      <time datetime="2026-10-09">2026.10.09</time>
-      <p>ここに今日の勉強日記が入ります。やったこと、わかったこと、つまずいたことなどを書いてください。</p>
+      <div class="avatar">&gt;_</div>
+      <div class="post-body">
+        <time>2026.10.09</time>
+        <p>サイトをつくり始めた日。まずはトップページから。</p>
+      </div>
     </article>
 
     <article class="post">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <p>ここに勉強日記が入ります。短くても大丈夫です。</p>
+      <div class="avatar">&gt;_</div>
+      <div class="post-body">
+        <time>2026.10.08</time>
+        <p>（ここに勉強の日記が入ります。やったこと、つまずいたこと、わかったことを一言ずつ。）</p>
+      </div>
     </article>
 
     <article class="post">
-      <time datetime="2026-10-07">2026.10.07</time>
-      <p>ここに勉強日記が入ります。</p>
+      <div class="avatar">&gt;_</div>
+      <div class="post-body">
+        <time>2026.10.07</time>
+        <p>（サンプル）HTMLとCSSの復習。flexboxがちょっと分かってきた気がする。</p>
+      </div>
     </article>
 
-    <article class="post">
-      <time datetime="2026-10-06">2026.10.06</time>
-      <p>ここに勉強日記が入ります。</p>
-    </article>
+    <!-- ▲ ここまで -->
 
-    <article class="post">
-      <time datetime="2026-10-05">2026.10.05</time>
-      <p>ここに勉強日記が入ります。</p>
-    </article>
   </div>
 
-  <p class="note">ここまでが最新の投稿です</p>
+  <a class="back" href="index.html">&lt; index に戻る</a>
 </main>
 
 <footer>
-  <p style="margin:0">© アプリの勉強ノート</p>
+  &copy; 2026 Code Study Notes
 </footer>
 
 </body>
